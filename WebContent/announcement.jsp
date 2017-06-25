@@ -32,7 +32,7 @@
 	        <nav>
 	          <ul class="nav nav-pills pull-right">
 	            <li role="presentation" class="active"><a href="RetrieveAnnouncementServlet?examCode=<%=announcement.getExamCode()%>">Announcements</a></li>
-	            <li role="presentation"><a href="downloadables.jsp">Downloadables</a></li>
+	            <li role="presentation"><a href="downloadable.jsp">Downloadables</a></li>
 	            <li role="presentation"><a href="submission.jsp">Submissions</a></li>
 	          </ul>
 	        </nav>
