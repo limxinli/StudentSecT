@@ -16,7 +16,12 @@
 	    <!-- Favicon -->
 	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 		<link rel="icon" href="images/favicon.ico" type="image/x-icon">
-	
+
+		<%
+			if(session.getAttribute("LOGIN") != "TRUE") {
+				response.sendRedirect("index.jsp");
+			}
+		%> 
 	</head>
 
 	<body>
@@ -27,7 +32,7 @@
 			for(AnnouncementDetails announcement:retrieveAnnouncement) {
 				
 				//When student click the refresh button in browser, it goes through the servlet
-				if(session.getAttribute("REFRESH")!=null){ %>
+				if(session.getAttribute("REFRESH")!= null){ %>
 					<script type="text/javascript">
 		            	window.location.href = "RetrieveAnnouncementServlet?examCode=<%=announcement.getExamCode()%>"
 		        	</script>
@@ -88,6 +93,5 @@
 	      </footer>
 	
 	    </div>
-	
 	</body>
 </html>

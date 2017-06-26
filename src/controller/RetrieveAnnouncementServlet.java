@@ -47,11 +47,14 @@ public class RetrieveAnnouncementServlet extends HttpServlet {
 		session.removeAttribute("REFRESH");
 		
 		for(AnnouncementDetails announcement:Announcement) {
+			session.setAttribute("LOGIN", "TRUE");
 			session.setAttribute("announcement", Announcement);
 			response.sendRedirect("announcement.jsp");
 			return;
 		}
-		response.sendRedirect("index.html");
+		session.setAttribute("LOGIN", "FALSE");
+		request.setAttribute("errorMessage", "Invalid Exam Code");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	/**
