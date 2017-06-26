@@ -20,11 +20,22 @@
 	</head>
 
 	<body>
-		 <%
+		 <% 
 		 ArrayList<AnnouncementDetails> retrieveAnnouncement = (ArrayList<AnnouncementDetails>)session.getAttribute("announcement");
 				
 		 if (retrieveAnnouncement != null) {
 			for(AnnouncementDetails announcement:retrieveAnnouncement) {
+				
+				//When student click the refresh button in browser, it goes through the servlet
+				if(session.getAttribute("REFRESH")!=null){ %>
+					<script type="text/javascript">
+		            	window.location.href = "RetrieveAnnouncementServlet?examCode=<%=announcement.getExamCode()%>"
+		        	</script>
+		        <%
+				}
+				else{    
+					session.setAttribute("REFRESH","TRUE");
+				}
 
 		%>
 	    <div class="container">

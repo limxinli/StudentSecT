@@ -44,6 +44,8 @@ public class RetrieveAnnouncementServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		
+		session.removeAttribute("REFRESH");
+		
 		for(AnnouncementDetails announcement:Announcement) {
 			session.setAttribute("announcement", Announcement);
 			response.sendRedirect("announcement.jsp");
