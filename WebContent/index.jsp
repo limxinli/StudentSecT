@@ -27,11 +27,11 @@
 
     <div class="container">
 
-      <form action="RetrieveAnnouncementServlet" class="form-signin">
+      <form action="RetrieveAssessmentServlet" class="form-signin">
         <div style="color: #FF0000;">${errorMessage}</div>
         <h2 class="form-signin-heading">Exam Code:</h2>
         <input type="text" name="examCode" id="examCode" class="form-control" placeholder="E.g. ABC123" required autofocus><br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="submitCode()">Enter</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Enter</button>
       </form>
 
     </div>

@@ -25,30 +25,41 @@
 </head>
 <body>
 	<% 
-		 ArrayList<AnnouncementDetails> retrieveAnnouncement = (ArrayList<AnnouncementDetails>)session.getAttribute("announcement");
-				
-		 if (retrieveAnnouncement != null) {
-			for(AnnouncementDetails announcement:retrieveAnnouncement) { %>
+	ArrayList<AssessmentDetails> retrieveAssessment = (ArrayList<AssessmentDetails>)session.getAttribute("assessment");
+	
+	 if (retrieveAssessment != null) {
+		for(AssessmentDetails assessment:retrieveAssessment) { %>
 	<div class="container">
 	      <div class="header clearfix">
 	        <nav>
 	          <ul class="nav nav-pills pull-right">
-	            <li role="presentation"><a href="RetrieveAnnouncementServlet?examCode=<%=announcement.getExamCode()%>">Announcements</a></li>
-	            <li role="presentation" class="active"><a href="downloadable.jsp">Downloadables</a></li>
+	            <li role="presentation"><a href="RetrieveAnnouncementServlet?examCode=<%=assessment.getExamCode()%>">Announcements</a></li>
+	            <li role="presentation" class="active"><a href="RetrieveFileServlet?examCode=<%=assessment.getExamCode()%>">Downloadables</a></li>
 	            <li role="presentation"><a href="submission.jsp">Submissions</a></li>
 	          </ul>
 	        </nav>
 	        <h3 class="text-muted"><img src="images/logo.png" alt="Secured-T logo" id="logo">Secured-T</h3>
 	      </div>
 		  <h3>
-		  	<%=announcement.getModuleCode()%> -
-			<%=announcement.getModuleName()%>
+		  	<%=assessment.getModuleCode()%> -
+			<%=assessment.getModuleName()%>
 		  </h3>
 		  <%
 					break;}}
 		  %>
 	      <div class="row marketing">
-
+	      	<p>Attached files:</p>
+	      	<% 
+			ArrayList<FileDetails> retrieveFile = (ArrayList<FileDetails>)session.getAttribute("file");
+			
+			 if (retrieveFile != null) {
+				for(FileDetails file:retrieveFile) { %>
+			<a href="<%=file.getFileLink()%>"><%=file.getFileName()%></a>
+			
+			<%
+				}
+			 }
+			%>
 	      </div>
 	
 	      <footer class="footer">
