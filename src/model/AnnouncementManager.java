@@ -24,13 +24,12 @@ public class AnnouncementManager{
 			
 			while (rs.next()) {
 				String moduleCode = rs.getString("C_MODULE_CODE");
-				String moduleName = rs.getString("C_MODULE_NAME");
 				String lecturerName = rs.getString("C_LECTURER_NAME");
 				String announcement = rs.getString("C_ANNOUNCEMENT");
 				Timestamp timestamp = rs.getTimestamp("C_TIMESTAMP");
 				examCode = rs.getString("C_EXAM_CODE");
 
-				AnnouncementDetails ad = new AnnouncementDetails(moduleCode, moduleName, lecturerName, announcement, timestamp, examCode);
+				AnnouncementDetails ad = new AnnouncementDetails(moduleCode, lecturerName, announcement, timestamp, examCode);
 				Announcement.add(ad);
 			}
 			conn.close();

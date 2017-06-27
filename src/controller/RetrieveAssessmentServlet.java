@@ -1,9 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.AnnouncementDetails;
-import model.AnnouncementManager;
+import model.AssessmentDetails;
+import model.AssessmentManager;
 
 /**
- * Servlet implementation class RetrieveAnnouncementServlet
+ * Servlet implementation class RetrieveAssessmentServlet
  */
-@WebServlet("/RetrieveAnnouncementServlet")
-public class RetrieveAnnouncementServlet extends HttpServlet {
+@WebServlet("/RetrieveAssessmentServlet")
+public class RetrieveAssessmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RetrieveAnnouncementServlet() {
+    public RetrieveAssessmentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,19 +33,23 @@ public class RetrieveAnnouncementServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		String examCode = request.getParameter("examCode");
 		
-		AnnouncementManager db = new AnnouncementManager();
+		AssessmentManager db = new AssessmentManager();
 
-		ArrayList<AnnouncementDetails> Announcement = db.retrieveAnnouncement(examCode);
+		ArrayList<AssessmentDetails> Assessment = db.retrieveAssessment(examCode);
 
 		HttpSession session = request.getSession();
-		
-		session.removeAttribute("REFRESH");
-		
-		session.setAttribute("announcement", Announcement);
-		response.sendRedirect("announcement.jsp");
+			
+		for(AssessmentDetails announcement:Assessment) {
+			session.setAttribute("LOGIN", "TRUE");
+			session.setAttribute("assessment", Assessment);
+			response.sendRedirect("RetrieveAnnouncementServlet?examCode="+examCode);
+			return;
+		}
+		session.setAttribute("LOGIN", "FALSE");
+		request.setAttribute("errorMessage", "Invalid Exam Code");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	/**
@@ -55,7 +57,7 @@ public class RetrieveAnnouncementServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

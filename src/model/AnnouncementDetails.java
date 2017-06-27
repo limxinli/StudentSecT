@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 
 public class AnnouncementDetails {
 	private String moduleCode;
-	private String moduleName;
 	private String lecturerName;
 	private String announcement;
 	private Timestamp timestamp;
@@ -15,11 +14,10 @@ public class AnnouncementDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AnnouncementDetails(String moduleCode, String moduleName, String lecturerName, String announcement,
+	public AnnouncementDetails(String moduleCode, String lecturerName, String announcement,
 			Timestamp timestamp, String examCode) {
 		super();
 		this.moduleCode = moduleCode;
-		this.moduleName = moduleName;
 		this.lecturerName = lecturerName;
 		this.announcement = announcement;
 		this.timestamp = timestamp;
@@ -32,14 +30,6 @@ public class AnnouncementDetails {
 
 	public void setModuleCode(String moduleCode) {
 		this.moduleCode = moduleCode;
-	}
-
-	public String getModuleName() {
-		return moduleName;
-	}
-
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
 	}
 
 	public String getLecturerName() {

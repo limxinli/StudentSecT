@@ -26,15 +26,15 @@
 
 	<body>
 		 <% 
-		 ArrayList<AnnouncementDetails> retrieveAnnouncement = (ArrayList<AnnouncementDetails>)session.getAttribute("announcement");
+		 ArrayList<AssessmentDetails> retrieveAssessment = (ArrayList<AssessmentDetails>)session.getAttribute("assessment");
 				
-		 if (retrieveAnnouncement != null) {
-			for(AnnouncementDetails announcement:retrieveAnnouncement) {
+		 if (retrieveAssessment != null) {
+			for(AssessmentDetails assessment:retrieveAssessment) {
 				
 				//When student click the refresh button in browser, it goes through the servlet
 				if(session.getAttribute("REFRESH")!= null){ %>
 					<script type="text/javascript">
-		            	window.location.href = "RetrieveAnnouncementServlet?examCode=<%=announcement.getExamCode()%>"
+		            	window.location.href = "RetrieveAnnouncementServlet?examCode=<%=assessment.getExamCode()%>"
 		        	</script>
 		        <%
 				}
@@ -47,16 +47,16 @@
 	      <div class="header clearfix">
 	        <nav>
 	          <ul class="nav nav-pills pull-right">
-	            <li role="presentation" class="active"><a href="RetrieveAnnouncementServlet?examCode=<%=announcement.getExamCode()%>">Announcements</a></li>
-	            <li role="presentation"><a href="downloadable.jsp">Downloadables</a></li>
+	            <li role="presentation" class="active"><a href="RetrieveAssessmentServlet?examCode=<%=assessment.getExamCode()%>">Announcements</a></li>
+	            <li role="presentation"><a href="RetrieveFileServlet?examCode=<%=assessment.getExamCode()%>">Downloadables</a></li>
 	            <li role="presentation"><a href="submission.jsp">Submissions</a></li>
 	          </ul>
 	        </nav>
 	        <h3 class="text-muted"><img src="images/logo.png" alt="Secured-T logo" id="logo">Secured-T</h3>
 	      </div>
 		  <h3>
-		  	<%=announcement.getModuleCode()%> -
-			<%=announcement.getModuleName()%>
+		  	<%=assessment.getModuleCode()%> -
+			<%=assessment.getModuleName()%>
 		  </h3>
 		  <%
 					break;}
@@ -65,6 +65,7 @@
 			<div class="announcement">
 			  <h2 id="announcement_title">Announcements</h2>
 			  		<%
+			  		ArrayList<AnnouncementDetails> retrieveAnnouncement = (ArrayList<AnnouncementDetails>)session.getAttribute("announcement");
 			  		for(AnnouncementDetails announcement:retrieveAnnouncement) {
 						SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 			  		%>
