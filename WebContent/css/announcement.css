@@ -105,3 +105,14 @@ body {
 #individual_announcement {
 	border-top: 1px solid #e5e5e5;
 }
+
+.notification-counter {   
+    position: absolute;
+    background-color: rgba(212, 19, 13, 1);
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 3px;
+    font: 12px Verdana;
+    margin-left: -10px;
+    margin-top: -3px;
+}

@@ -55,5 +55,6 @@
 	        <p>&copy; 2017 Singapore Polytechnic</p>
 	      </footer>
 	   </div>
+
 	</body>
 </html>

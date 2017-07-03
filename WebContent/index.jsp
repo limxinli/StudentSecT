@@ -27,7 +27,7 @@
 
     <div class="container">
 
-      <form action="RetrieveAssessmentServlet" class="form-signin">
+      <form action="RetrieveAssessmentServlet" method="post" class="form-signin">
         <div style="color: #FF0000;">${errorMessage}</div>
         <h2 class="form-signin-heading">Exam Code:</h2>
         <input type="text" name="examCode" id="examCode" class="form-control" placeholder="E.g. ABC123" required autofocus><br>

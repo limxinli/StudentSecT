@@ -57,6 +57,23 @@ public class RetrieveAssessmentServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String examCode = request.getParameter("examCode");
+		
+		AssessmentManager db = new AssessmentManager();
+
+		ArrayList<AssessmentDetails> Assessment = db.retrieveAssessment(examCode);
+
+		HttpSession session = request.getSession();
+			
+		for(AssessmentDetails assessment:Assessment) {
+			session.setAttribute("LOGIN", "TRUE");
+			session.setAttribute("assessment", Assessment);
+			response.sendRedirect("RetrieveAnnouncementServlet?examCode="+examCode);
+			return;
+		}
+		session.setAttribute("LOGIN", "FALSE");
+		request.setAttribute("errorMessage", "Invalid Exam Code");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
 	}
 

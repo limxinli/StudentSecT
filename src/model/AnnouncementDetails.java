@@ -14,8 +14,8 @@ public class AnnouncementDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AnnouncementDetails(String moduleCode, String lecturerName, String announcement,
-			Timestamp timestamp, String examCode) {
+	public AnnouncementDetails(String moduleCode, String lecturerName, String announcement, Timestamp timestamp,
+			String examCode) {
 		super();
 		this.moduleCode = moduleCode;
 		this.lecturerName = lecturerName;
@@ -63,5 +63,6 @@ public class AnnouncementDetails {
 	public void setExamCode(String examCode) {
 		this.examCode = examCode;
 	}
+
 	
 }

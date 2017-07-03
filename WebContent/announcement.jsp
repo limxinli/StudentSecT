@@ -6,6 +6,8 @@
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Secured-T</title>
+		<!-- Jquery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
 	    <!-- Bootstrap core CSS -->
 	    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +49,7 @@
 	      <div class="header clearfix">
 	        <nav>
 	          <ul class="nav nav-pills pull-right">
-	            <li role="presentation" class="active"><a href="RetrieveAssessmentServlet?examCode=<%=assessment.getExamCode()%>">Announcements</a></li>
+	            <li role="presentation" class="active" id="notif"><a href="RetrieveAssessmentServlet?examCode=<%=assessment.getExamCode()%>">Announcements</a></li>
 	            <li role="presentation"><a href="RetrieveFileServlet?examCode=<%=assessment.getExamCode()%>">Downloadables</a></li>
 	            <li role="presentation"><a href="submission.jsp">Submissions</a></li>
 	          </ul>
@@ -63,7 +65,7 @@
 		  %>
 	      <div class="row marketing">
 			<div class="announcement">
-			  <h2 id="announcement_title">Announcements</h2>
+			  <h2 id="announcement_title">Announcements</h2><br>
 			  		<%
 			  		ArrayList<AnnouncementDetails> retrieveAnnouncement = (ArrayList<AnnouncementDetails>)session.getAttribute("announcement");
 			  		for(AnnouncementDetails announcement:retrieveAnnouncement) {
@@ -78,7 +80,7 @@
 					</p>
 
 			<%
-					}
+			  		}
 				}
 				else { %>
 					<p>No announcements</p>
@@ -92,7 +94,7 @@
 	      <footer class="footer">
 	        <p>&copy; 2017 Singapore Polytechnic</p>
 	      </footer>
-	
 	    </div>
+
 	</body>
 </html>

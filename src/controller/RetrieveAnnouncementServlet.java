@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import model.AnnouncementDetails;
 import model.AnnouncementManager;
+import model.AssessmentDetails;
 
 /**
  * Servlet implementation class RetrieveAnnouncementServlet
@@ -45,7 +46,7 @@ public class RetrieveAnnouncementServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		session.removeAttribute("REFRESH");
-		
+
 		session.setAttribute("announcement", Announcement);
 		response.sendRedirect("announcement.jsp");
 	}
