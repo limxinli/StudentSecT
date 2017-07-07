@@ -10,20 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.AssessmentDetails;
-import model.AssessmentManager;
+import model.StudentInfoManager;
 
 /**
- * Servlet implementation class RetrieveAssessmentServlet
+ * Servlet implementation class UpdateAssessmentServlet
  */
-@WebServlet("/RetrieveAssessmentServlet")
-public class RetrieveAssessmentServlet extends HttpServlet {
+@WebServlet("/UpdateAssessmentServlet")
+public class UpdateAssessmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RetrieveAssessmentServlet() {
+    public UpdateAssessmentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +32,6 @@ public class RetrieveAssessmentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String examCode = request.getParameter("examCode");
-		
-		AssessmentManager db = new AssessmentManager();
-
-		ArrayList<AssessmentDetails> Assessment = db.retrieveAssessment(examCode);
-
-		HttpSession session = request.getSession();
-			
-		for(AssessmentDetails announcement:Assessment) {
-			session.setAttribute("LOGIN", "TRUE");
-			session.setAttribute("assessment", Assessment);
-			response.sendRedirect("RetrieveAnnouncementServlet?examCode="+examCode);
-			return;
-		}
-		session.setAttribute("LOGIN", "FALSE");
-		request.setAttribute("errorMessage", "Invalid Exam Code");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	/**
@@ -57,6 +39,15 @@ public class RetrieveAssessmentServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String examCode = request.getParameter("examCode");
+		String adminNo = request.getParameter("adminNo");
+		
+		StudentInfoManager db = new StudentInfoManager();
+		
+		db.updateAssessment(examCode, adminNo);
+
+		response.sendRedirect("RetrieveAssessmentServlet?examCode="+examCode);
+
 	}
 
 }

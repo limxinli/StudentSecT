@@ -27,10 +27,12 @@
 
     <div class="container">
 
-      <form action="RetrieveAssessmentServlet" method="post" class="form-signin">
+      <form action="UpdateAssessmentServlet" method="post" class="form-signin">
         <div style="color: #FF0000;">${errorMessage}</div>
-        <h2 class="form-signin-heading">Exam Code:</h2>
-        <input type="text" name="examCode" id="examCode" class="form-control" placeholder="E.g. ABC123" required autofocus><br>
+        <h3 class="form-signin-heading">Admission Number:</h3>
+        <input type="text" name="adminNo" id="adminNo" class="form-control" placeholder="E.g. P1234567" required autofocus><br>
+        <h3 class="form-signin-heading">Exam Code:</h3>
+        <input type="text" name="examCode" id="examCode" class="form-control" placeholder="E.g. ABC123" required autofocus><br><br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Enter</button>
       </form>
 
