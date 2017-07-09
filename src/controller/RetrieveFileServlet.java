@@ -41,8 +41,6 @@ public class RetrieveFileServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		
-		session.removeAttribute("REFRESH");
-		
 		session.setAttribute("file", File);
 		response.sendRedirect("downloadable.jsp");
 	}

@@ -1,9 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import model.AnnouncementDetails;
 import model.AnnouncementManager;
-import model.AssessmentDetails;
 
 /**
  * Servlet implementation class RetrieveAnnouncementServlet
