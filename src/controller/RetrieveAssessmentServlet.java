@@ -41,10 +41,10 @@ public class RetrieveAssessmentServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 			
-		for(AssessmentDetails announcement:Assessment) {
+		for(AssessmentDetails assessment:Assessment) {
 			session.setAttribute("LOGIN", "TRUE");
 			session.setAttribute("assessment", Assessment);
-			response.sendRedirect("RetrieveAnnouncementServlet?examCode="+examCode);
+			response.sendRedirect("RetrieveAnnouncementServlet?assessmentID="+assessment.getId());
 			return;
 		}
 		session.setAttribute("LOGIN", "FALSE");

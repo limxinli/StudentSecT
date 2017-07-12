@@ -7,7 +7,7 @@ import db.DBConnection;
 
 public class StudentInfoManager {
 	
-	public static void updateAssessment(String examCode, String adminNo) {
+	public static void updateStudentInfo(String examCode, String adminNo) {
 		try {	
 			Connection conn = DBConnection.getConnection();
 			

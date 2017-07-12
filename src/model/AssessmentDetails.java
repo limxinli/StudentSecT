@@ -1,6 +1,7 @@
 package model;
 
 public class AssessmentDetails {
+	private int id;
 	private String moduleCode;
 	private String moduleName;
 	private String lecturerID;
@@ -13,9 +14,10 @@ public class AssessmentDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AssessmentDetails(String moduleCode, String moduleName, String lecturerID, int period, String datetime,
+	public AssessmentDetails(int id, String moduleCode, String moduleName, String lecturerID, int period, String datetime,
 			String examCode) {
 		super();
+		this.id = id;
 		this.moduleCode = moduleCode;
 		this.moduleName = moduleName;
 		this.lecturerID = lecturerID;
@@ -24,13 +26,22 @@ public class AssessmentDetails {
 		this.examCode = examCode;
 	}
 
-	public AssessmentDetails(String moduleCode, String moduleName, int period, String datetime, String examCode) {
+	public AssessmentDetails(int id, String moduleCode, String moduleName, int period, String datetime, String examCode) {
 		super();
+		this.id = id;
 		this.moduleCode = moduleCode;
 		this.moduleName = moduleName;
 		this.period = period;
 		this.datetime = datetime;
 		this.examCode = examCode;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getModuleCode() {

@@ -42,7 +42,7 @@ public class UpdateAssessmentServlet extends HttpServlet {
 		
 		StudentInfoManager db = new StudentInfoManager();
 		
-		db.updateAssessment(examCode, adminNo);
+		db.updateStudentInfo(examCode, adminNo);
 
 		response.sendRedirect("RetrieveAssessmentServlet?examCode="+examCode);
 

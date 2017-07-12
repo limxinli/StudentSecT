@@ -36,7 +36,7 @@
 				//When student click the refresh button in browser, it goes through the servlet
 				if(session.getAttribute("REFRESH")!= null){ %>
 					<script type="text/javascript">
-		            	window.location.href = "RetrieveAnnouncementServlet?examCode=<%=assessment.getExamCode()%>"
+		            	window.location.href = "RetrieveAnnouncementServlet?assessmentID=<%=assessment.getId()%>"
 		        	</script>
 		        <%
 				}
@@ -65,7 +65,29 @@
 		  %>
 	      <div class="row marketing">
 			<div class="announcement">
-			  <h2 id="announcement_title">Announcements</h2><br>
+			  <h2 id="announcement_title">Announcements</h2>
+			  	<p id="imptmessage">**Important**<br>
+					Please note that your activities are being monitored the entire time you are connected to this network. You are only allowed to access the following domains for this assessment:<br></p>	 
+					<%
+			  		ArrayList<DomainDetails> retrieveDomain = (ArrayList<DomainDetails>)session.getAttribute("domain");
+					if (retrieveDomain != null) {
+						for(DomainDetails domain:retrieveDomain) {
+			  		%>
+			  		<p id="domains<%=domain.getId()%>" class="domains"><%=domain.getDomainName()%></p>
+			  		<p id="domainName<%=domain.getId()%>" class="domainName"></p>
+			  		<script type="text/javascript">
+					$(document).ready(function(){
+						var domainName = $("#domains<%=domain.getId()%>").html().replace('\\','');
+						$("#domainName<%=domain.getId()%>").html("- " + domainName);
+					});
+					</script> 
+			  		<%
+						}
+					 }
+			  		%>
+			  	<p id="imptmessage2">
+			  		If you attempt to go to domains not allowed for this assessment, you will be blocked.	
+			  	</p>
 			  		<%
 			  		ArrayList<AnnouncementDetails> retrieveAnnouncement = (ArrayList<AnnouncementDetails>)session.getAttribute("announcement");
 			  		for(AnnouncementDetails announcement:retrieveAnnouncement) {
@@ -95,6 +117,5 @@
 	        <p>&copy; 2017 Singapore Polytechnic</p>
 	      </footer>
 	    </div>
-
-	</body>
+</body>
 </html>

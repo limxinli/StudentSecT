@@ -22,13 +22,14 @@ public class AssessmentManager {
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
+				int id = rs.getInt("C_ID");
 				String moduleCode = rs.getString("C_MODULE_CODE");
 				String moduleName = rs.getString("C_MODULE_NAME");
 				int period = rs.getInt("C_PERIOD");
 				String datetime = rs.getString("C_DATETIME");
 				examCode = rs.getString("C_EXAM_CODE");
 
-				AssessmentDetails ad = new AssessmentDetails(moduleCode, moduleName, period, datetime, examCode);
+				AssessmentDetails ad = new AssessmentDetails(id, moduleCode, moduleName, period, datetime, examCode);
 				Assessment.add(ad);
 			}
 			conn.close();

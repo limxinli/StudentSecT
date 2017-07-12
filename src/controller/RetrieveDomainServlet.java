@@ -10,21 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.AnnouncementDetails;
-import model.AnnouncementManager;
-import model.AssessmentDetails;
+import model.DomainDetails;
+import model.DomainManager;
 
 /**
- * Servlet implementation class RetrieveAnnouncementServlet
+ * Servlet implementation class RetrieveDomainServlet
  */
-@WebServlet("/RetrieveAnnouncementServlet")
-public class RetrieveAnnouncementServlet extends HttpServlet {
+@WebServlet("/RetrieveDomainServlet")
+public class RetrieveDomainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RetrieveAnnouncementServlet() {
+    public RetrieveDomainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +33,18 @@ public class RetrieveAnnouncementServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		String assessmentID = request.getParameter("assessmentID");
 		
-		AnnouncementManager db = new AnnouncementManager();
+		DomainManager db = new DomainManager();
 
-		ArrayList<AnnouncementDetails> Announcement = db.retrieveAnnouncement(assessmentID);
+		ArrayList<DomainDetails> Domain = db.retrieveDomain(assessmentID);
 
 		HttpSession session = request.getSession();
 		
 		session.removeAttribute("REFRESH");
-		
-		session.setAttribute("announcement", Announcement);
-		response.sendRedirect("RetrieveDomainServlet?assessmentID="+assessmentID);
 
+		session.setAttribute("domain", Domain);
+		response.sendRedirect("announcement.jsp");
 	}
 
 	/**
@@ -55,7 +52,6 @@ public class RetrieveAnnouncementServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 	}
 
 }
