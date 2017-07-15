@@ -9,14 +9,14 @@ public class StudentDetails {
 	private int submitDisable;
 	private int cheating;
 	private int disconnected;
-	private String examCode;
+	private int assessmentId;
 	
 	public StudentDetails() {
 		super();
 	}
 
 	public StudentDetails(String adminNo, String ipAddr, String portNo, String timestamp, String uniqueCode,
-			int submitDisable, int cheating, int disconnected, String examCode) {
+			int submitDisable, int cheating, int disconnected, int assessmentId) {
 		super();
 		this.adminNo = adminNo;
 		this.ipAddr = ipAddr;
@@ -26,7 +26,7 @@ public class StudentDetails {
 		this.submitDisable = submitDisable;
 		this.cheating = cheating;
 		this.disconnected = disconnected;
-		this.examCode = examCode;
+		this.assessmentId = assessmentId;
 	}
 
 	public StudentDetails(String adminNo, String ipAddr, String portNo, String timestamp, String uniqueCode,
@@ -106,12 +106,12 @@ public class StudentDetails {
 		this.disconnected = disconnected;
 	}
 
-	public String getExamCode() {
-		return examCode;
+	public int getAssessmentId() {
+		return assessmentId;
 	}
 
-	public void setExamCode(String examCode) {
-		this.examCode = examCode;
+	public void setAssessmentId(int assessmentId) {
+		this.assessmentId = assessmentId;
 	}
 
 }

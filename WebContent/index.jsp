@@ -27,7 +27,7 @@
 
     <div class="container">
 
-      <form action="UpdateAssessmentServlet" method="post" class="form-signin">
+      <form action="UpdateStudentServlet" method="post" class="form-signin">
         <div style="color: #FF0000;">${errorMessage}</div>
         <h3 class="form-signin-heading">Admission Number:</h3>
         <input type="text" name="adminNo" id="adminNo" class="form-control" placeholder="E.g. P1234567" required autofocus><br>

@@ -11,7 +11,7 @@ public class StudentInfoManager {
 		try {	
 			Connection conn = DBConnection.getConnection();
 			
-			String sql = "UPDATE T_STUDENT_INFO SET C_EXAM_CODE=? WHERE C_ADMISSION_NO=?";
+			String sql = "UPDATE T_STUDENT_INFO SET C_ASSESSMENT_ID=(SELECT C_ID FROM T_ASSESSMENT WHERE C_EXAM_CODE=?) WHERE C_ADMISSION_NO=?";
 
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, examCode);

@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import model.StudentInfoManager;
 
 /**
- * Servlet implementation class UpdateAssessmentServlet
+ * Servlet implementation class UpdateStudentServlet
  */
-@WebServlet("/UpdateAssessmentServlet")
-public class UpdateAssessmentServlet extends HttpServlet {
+@WebServlet("/UpdateStudentServlet")
+public class UpdateStudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateAssessmentServlet() {
+    public UpdateStudentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -84,7 +84,7 @@
 			  		<%
 						}
 					 }
-			  		%>
+					%>
 			  	<p id="imptmessage2">
 			  		If you attempt to go to domains not allowed for this assessment, you will be blocked.	
 			  	</p>
