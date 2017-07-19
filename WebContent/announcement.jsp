@@ -51,7 +51,7 @@
 	          <ul class="nav nav-pills pull-right">
 	            <li role="presentation" class="active" id="notif"><a href="RetrieveAssessmentServlet?examCode=<%=assessment.getExamCode()%>">Announcements</a></li>
 	            <li role="presentation"><a href="RetrieveFileServlet?examCode=<%=assessment.getExamCode()%>">Downloadables</a></li>
-	            <li role="presentation"><a href="submission.jsp">Submissions</a></li>
+				<li role="presentation"><a href="submission.jsp">Submissions</a></li>
 	          </ul>
 	        </nav>
 	        <h3 class="text-muted"><img src="images/logo.png" alt="Secured-T logo" id="logo">Secured-T</h3>
@@ -77,13 +77,18 @@
 			  		<p id="domainName<%=domain.getId()%>" class="domainName"></p>
 			  		<script type="text/javascript">
 					$(document).ready(function(){
-						var domainName = $("#domains<%=domain.getId()%>").html().replace('\\','');
-						$("#domainName<%=domain.getId()%>").html("- " + domainName);
+						var domainName = $("#domains<%=domain.getId()%>").html();
+						domain = domainName.replace(/[/\\*]/g, '');
+						$("#domainName<%=domain.getId()%>").prepend("- " + domain);
 					});
 					</script> 
 			  		<%
 						}
 					 }
+					else { %>
+					<p>All domains allowed</p>
+				  <%
+					}
 					%>
 			  	<p id="imptmessage2">
 			  		If you attempt to go to domains not allowed for this assessment, you will be blocked.	
@@ -117,5 +122,11 @@
 	        <p>&copy; 2017 Singapore Polytechnic</p>
 	      </footer>
 	    </div>
+	    
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="dist/js/bootstrap.min.js"></script>
 </body>
 </html>

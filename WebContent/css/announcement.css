@@ -136,3 +136,18 @@ body {
 	font-weight: bold;
 	color: red;
 }
+
+#uniqueContainer {
+	width: 50%;
+	margin: auto;
+	margin-top: 40px;
+	margin-bottom: 30px;
+}
+
+#ubutton {
+	float: right;
+}
+
+#uniqueCode {
+	margin-top: 30px;
+}

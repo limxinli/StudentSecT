@@ -28,14 +28,15 @@
 	ArrayList<AssessmentDetails> retrieveAssessment = (ArrayList<AssessmentDetails>)session.getAttribute("assessment");
 	
 	 if (retrieveAssessment != null) {
-		for(AssessmentDetails assessment:retrieveAssessment) { %>
+		for(AssessmentDetails assessment:retrieveAssessment) { 
+		%>
 	<div class="container">
 	      <div class="header clearfix">
 	        <nav>
 	          <ul class="nav nav-pills pull-right">
-	            <li role="presentation"><a href="RetrieveAnnouncementServlet?examCode=<%=assessment.getExamCode()%>">Announcements</a></li>
+	            <li role="presentation"><a href="RetrieveAnnouncementServlet?assessmentID=<%=assessment.getId()%>">Announcements</a></li>
 	            <li role="presentation" class="active"><a href="RetrieveFileServlet?examCode=<%=assessment.getExamCode()%>">Downloadables</a></li>
-	            <li role="presentation"><a href="submission.jsp">Submissions</a></li>
+				<li role="presentation"><a href="submission.jsp">Submissions</a></li>
 	          </ul>
 	        </nav>
 	        <h3 class="text-muted"><img src="images/logo.png" alt="Secured-T logo" id="logo">Secured-T</h3>

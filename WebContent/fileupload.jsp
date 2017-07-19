@@ -47,26 +47,14 @@
 		  </h3>
 		  <%
 					break;}}
-		%>
-		<%
-			ArrayList<StudentDetails> retrieveStudent = (ArrayList<StudentDetails>)session.getAttribute("student");
-			
-			 if (retrieveStudent != null) {
-				for(StudentDetails student:retrieveStudent) { 
-		%>
-	      <div class="row marketing" id="uniqueContainer">
-	      		<p>Your Unique Code is: <%=student.getUniqueCode()%></p>
-				<form action="RetrieveStudentUniqueCodeServlet" method="post" id="uniqueCode">
-					<div style="color: #FF0000;">${errorMessage}</div>
-					<input type="hidden" name="adminNo" value="<%=student.getAdminNo()%>">
-					 Unique Code: <input type="text" name="uCode" id="uCode" class="form-control" required autofocus><br>
-	       			 <button class="btn btn-primary" id="ubutton" type="submit">Enter</button>
+		  %>
+	      <div onsubmit="return confirmation()" class="row marketing">
+				<form action="FileUploadServlet" method="post" enctype="multipart/form-data">
+					<input type="file" name="file" multiple />
+					<input type="Submit">
 				</form>
 	      </div>
-		<%
-				}
-			 }
-		%>
+	
 	      <footer class="footer">
 	        <p>&copy; 2017 Singapore Polytechnic</p>
 	      </footer>

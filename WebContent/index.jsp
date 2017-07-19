@@ -35,7 +35,7 @@
         <input type="text" name="examCode" id="examCode" class="form-control" placeholder="E.g. ABC123" required autofocus><br><br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Enter</button>
       </form>
-
     </div>
+    <a href="Downloadables/SPAI.jar">Download</a> <!-- for student to download the client -->
   </body>
 </html>

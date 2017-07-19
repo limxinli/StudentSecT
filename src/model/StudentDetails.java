@@ -1,6 +1,7 @@
 package model;
 
 public class StudentDetails {
+	private int id;
 	private String adminNo;
 	private String ipAddr;
 	private String portNo;
@@ -10,14 +11,16 @@ public class StudentDetails {
 	private int cheating;
 	private int disconnected;
 	private int assessmentId;
+	private int sskl;
 	
 	public StudentDetails() {
 		super();
 	}
 
-	public StudentDetails(String adminNo, String ipAddr, String portNo, String timestamp, String uniqueCode,
-			int submitDisable, int cheating, int disconnected, int assessmentId) {
+	public StudentDetails(int id, String adminNo, String ipAddr, String portNo, String timestamp, String uniqueCode,
+			int submitDisable, int cheating, int disconnected, int assessmentId, int sskl) {
 		super();
+		this.id = id;
 		this.adminNo = adminNo;
 		this.ipAddr = ipAddr;
 		this.portNo = portNo;
@@ -27,19 +30,15 @@ public class StudentDetails {
 		this.cheating = cheating;
 		this.disconnected = disconnected;
 		this.assessmentId = assessmentId;
+		this.sskl = sskl;
 	}
 
-	public StudentDetails(String adminNo, String ipAddr, String portNo, String timestamp, String uniqueCode,
-			int submitDisable, int cheating, int disconnected) {
-		super();
-		this.adminNo = adminNo;
-		this.ipAddr = ipAddr;
-		this.portNo = portNo;
-		this.timestamp = timestamp;
-		this.uniqueCode = uniqueCode;
-		this.submitDisable = submitDisable;
-		this.cheating = cheating;
-		this.disconnected = disconnected;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getAdminNo() {
@@ -112,6 +111,14 @@ public class StudentDetails {
 
 	public void setAssessmentId(int assessmentId) {
 		this.assessmentId = assessmentId;
+	}
+
+	public int getSskl() {
+		return sskl;
+	}
+
+	public void setSskl(int sskl) {
+		this.sskl = sskl;
 	}
 
 }
