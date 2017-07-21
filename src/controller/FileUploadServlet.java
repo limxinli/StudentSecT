@@ -54,22 +54,29 @@ public class FileUploadServlet extends HttpServlet {
 	    ArrayList<StudentSubmissionDetails> StudentSub = db.retrieveStudentSubmission(adminNo);
 	    
 	    for (StudentSubmissionDetails student: StudentSub) {
-	    	int version = student.getVersion();
-	    	version++;
-	    	
-		    String[] fileNameSplits = fileName.split("\\.");
-		    // extension is assumed to be the last part
-		    int extensionIndex = fileNameSplits.length - 1;
-		    //filename with version number
-		    fileName = fileNameSplits[0]+"_"+version+"."+fileNameSplits[extensionIndex];
-		    
-	    	// /home/securedt/submission/
-			filePart.write("C:/temp/"+fileName);
-			db.updateStudentSubmission(fileName, version, adminNo);
-			
-			request.setAttribute("cfmMessage", "You have submitted "+version+" time(s).");
-			request.getRequestDispatcher("submission.jsp").forward(request, response);
-			return;	
+	    	if (!fileName.equals("")) {
+	    		int version = student.getVersion();
+		    	version++;
+		    	
+			    String[] fileNameSplits = fileName.split("\\.");
+			    // extension is assumed to be the last part
+			    int extensionIndex = fileNameSplits.length - 1;
+			    //filename with version number
+			    fileName = fileNameSplits[0]+"_"+version+"."+fileNameSplits[extensionIndex];
+			    
+		    	// /home/securedt/submission/
+				filePart.write("C:/temp/"+fileName);
+				db.updateStudentSubmission(fileName, version, adminNo);
+				
+				request.setAttribute("cfmMessage", "You have submitted "+version+" time(s).");
+				request.getRequestDispatcher("submission.jsp").forward(request, response);
+				return;	
+	    	}
+	    	else {
+				request.setAttribute("cfmMessage", "Please choose a file.");
+				request.getRequestDispatcher("submission.jsp").forward(request, response);
+				return;	
+	    	}
 	    }
 	
 	}
