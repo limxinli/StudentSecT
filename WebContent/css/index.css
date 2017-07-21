@@ -4,6 +4,11 @@ body {
   background-color: #eee;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -37,4 +42,21 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  overflow:hidden;
+}
+
+#copyright {
+	padding-left: 20px;
 }

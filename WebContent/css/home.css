@@ -4,6 +4,11 @@ body {
   padding-bottom: 20px;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -29,12 +34,19 @@ body {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  overflow: hidden;
 }
 
 /* Customize container */
 @media (min-width: 768px) {
   .container {
     max-width: 730px;
+    padding-bottom: 30px;
   }
 }
 .container-narrow > hr {
@@ -150,4 +162,25 @@ body {
 
 #uniqueCode {
 	margin-top: 30px;
+}
+
+#uploadcontainer {
+	width: 40%;
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#submitbutton {
+	float: right;
+	margin-top: 20px;
+}
+
+#copyright {
+	padding-left: 20px;
+}
+
+#downloadablescontainer {
+	width: 40%;
+	margin: auto;
 }

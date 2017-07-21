@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -28,17 +29,11 @@ public class RetrieveStudentUniqueCodeServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    int tries = 0;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String uCode = request.getParameter("uCode");
 		String adminNo = request.getParameter("adminNo");
@@ -50,16 +45,27 @@ public class RetrieveStudentUniqueCodeServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		for (StudentDetails student: Student) {
-			if (student.getUniqueCode().equals(uCode)) {
-				response.sendRedirect("fileupload.jsp");
+			if (student.getUniqueCode().equals(uCode) && student.getDisconnected() == 0) {
+				response.sendRedirect("UpdateStudentSubmissionServlet?tries="+tries+"&adminNo="+adminNo+"&uCode="+uCode);
+				return;
+			}
+			else if (student.getDisconnected() == 1) {
+				request.setAttribute("errorMessage", "You cannot submit once you are disconnected");
+				request.getRequestDispatcher("submission.jsp").forward(request, response);
 				return;
 			}
 			else {
-				request.setAttribute("errorMessage", "Invalid Unique Code");
+				request.setAttribute("errorMessage", "Invalid unique code");
 				request.getRequestDispatcher("submission.jsp").forward(request, response);
 				return;
 			}
 		}
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
 }

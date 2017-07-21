@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,46 +11,43 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.StudentDetails;
-import model.StudentManager;
+import model.StudentSubmissionDetails;
+import model.StudentSubmissionManager;
 
 /**
- * Servlet implementation class RetrieveStudentServlet
+ * Servlet implementation class RetrieveStudentSubmissionServlet
  */
-@WebServlet("/RetrieveStudentServlet")
-public class RetrieveStudentServlet extends HttpServlet {
+@WebServlet("/RetrieveStudentSubmissionServlet")
+public class RetrieveStudentSubmissionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RetrieveStudentServlet() {
+    public RetrieveStudentSubmissionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String examCode = request.getParameter("examCode");
 		String adminNo = request.getParameter("adminNo");
+		String uCode = request.getParameter("uCode");
 		
-		StudentManager db = new StudentManager();
-
-		ArrayList<StudentDetails> Student = db.retrieveStudent(adminNo);
+		StudentSubmissionManager db = new StudentSubmissionManager();
+		
+		ArrayList<StudentSubmissionDetails> StudentSub = db.retrieveStudentSubmission(adminNo);
 
 		HttpSession session = request.getSession();
 		
-		for (StudentDetails student: Student) {
-			db.updateStudentInfo(examCode, adminNo);
-			session.setAttribute("student", Student);
-			response.sendRedirect("RetrieveAssessmentServlet?examCode="+examCode);
+		for (StudentSubmissionDetails student: StudentSub) {
+			session.setAttribute("studentsub", StudentSub);
+			response.sendRedirect("submission.jsp");
 			return;
 		}
-		request.setAttribute("errorMessage", "You need to enter your information in CSI before you can log in here.");
-		request.getRequestDispatcher("login.jsp").forward(request, response);
+		response.sendRedirect("InsertStudentSubmissionServlet?adminNo="+adminNo+"&uCode="+uCode);
 	}
 
 	/**

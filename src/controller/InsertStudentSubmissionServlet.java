@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.FileDetails;
-import model.FileManager;
+import model.StudentSubmissionDetails;
+import model.StudentSubmissionManager;
 
 /**
- * Servlet implementation class RetrieveFileServlet
+ * Servlet implementation class InsertStudentSubmissionServlet
  */
-@WebServlet("/RetrieveFileServlet")
-public class RetrieveFileServlet extends HttpServlet {
+@WebServlet("/InsertStudentSubmissionServlet")
+public class InsertStudentSubmissionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RetrieveFileServlet() {
+    public InsertStudentSubmissionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +33,13 @@ public class RetrieveFileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String examCode = request.getParameter("examCode");
+		String adminNo = request.getParameter("adminNo");
+		String uCode = request.getParameter("uCode");
 		
-		FileManager db = new FileManager();
-
-		ArrayList<FileDetails> File = db.retrieveFile(examCode);
-
-		HttpSession session = request.getSession();
+		StudentSubmissionManager db = new StudentSubmissionManager();
 		
-		session.setAttribute("file", File);
-		response.sendRedirect("downloadable.jsp");
+		db.insertStudentSubmission(adminNo, uCode);
+		response.sendRedirect("RetrieveStudentSubmissionServlet?adminNo="+adminNo+"&uCode="+uCode);
 	}
 
 	/**

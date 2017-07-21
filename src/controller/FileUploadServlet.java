@@ -31,6 +31,7 @@ public class FileUploadServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    int ansSubmit = 0;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,10 +50,14 @@ public class FileUploadServlet extends HttpServlet {
 			List<FileItem> multifiles = sf.parseRequest(request);
 
 			for (FileItem item : multifiles) {
-				item.write(new File("C:/temp/"+ FilenameUtils.getName(item.getName())));
+				ansSubmit++;
+				item.write(new File("/home/securedt/submission/"+FilenameUtils.getName(item.getName())));
+				request.setAttribute("cfmMessage", "You have submitted the answer "+ansSubmit+" time(s).");
+				request.getRequestDispatcher("fileupload.jsp").forward(request, response);
+				return;
 			}
+			response.sendRedirect("fileupload.jsp");
 			
-			response.sendRedirect("submission.jsp");
 		} catch (Exception e) {
 			System.out.println(e);
 		}

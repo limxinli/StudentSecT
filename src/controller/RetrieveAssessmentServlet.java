@@ -49,7 +49,7 @@ public class RetrieveAssessmentServlet extends HttpServlet {
 		}
 		session.setAttribute("LOGIN", "FALSE");
 		request.setAttribute("errorMessage", "Invalid Exam Code");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 	/**
