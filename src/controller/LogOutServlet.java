@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.AssessmentDetails;
+import model.StudentManager;
 
 /**
  * Servlet implementation class LogOutServlet
@@ -30,9 +30,15 @@ public class LogOutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String adminNo = request.getParameter("adminNo");
+		
 		HttpSession session = request.getSession();
 		
 		session.setAttribute("LOGIN", "FALSE");
+		
+		StudentManager db = new StudentManager();
+		
+		db.updateStudentInfo(adminNo);
 		
 		response.sendRedirect("login.jsp");
 

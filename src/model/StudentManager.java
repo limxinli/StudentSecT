@@ -13,7 +13,7 @@ public class StudentManager {
 		try {	
 			Connection conn = DBConnection.getConnection();
 			
-			String sql = "UPDATE T_STUDENT_INFO SET C_ASSESSMENT_ID=(SELECT C_ID FROM T_ASSESSMENT WHERE C_EXAM_CODE=?) WHERE C_ADMISSION_NO=?";
+			String sql = "UPDATE T_STUDENT_INFO SET C_ASSESSMENT_ID=(SELECT C_ID FROM T_ASSESSMENT WHERE C_EXAM_CODE=?), C_LOGIN=1 WHERE C_ADMISSION_NO=?";
 
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, examCode);
@@ -48,14 +48,14 @@ public class StudentManager {
 				String port = rs.getString("C_PORT");
 				String timestamp = rs.getString("C_TIMESTAMP");
 				String uniqueCode = rs.getString("C_UNIQUE_CODE");
-				int submitDisable = rs.getInt("C_SUBMIT_DISABLE");
 				int cheating = rs.getInt("C_CHEATING");
 				int disconnected = rs.getInt("C_DISCONNECTED");
 				int assessmentId = rs.getInt("C_ASSESSMENT_ID");
 				int sskl = rs.getInt("C_SS_KL");
+				int login = rs.getInt("C_LOGIN");
 				
 
-				StudentDetails sid = new StudentDetails(id, adminNo, ip, port, timestamp, uniqueCode, submitDisable, cheating, disconnected, assessmentId, sskl);
+				StudentDetails sid = new StudentDetails(id, adminNo, ip, port, timestamp, uniqueCode, cheating, disconnected, assessmentId, sskl, login);
 				Student.add(sid);
 			}
 			conn.close();
@@ -64,6 +64,24 @@ public class StudentManager {
 		} catch (Exception e) {
 			System.out.println(e);
 			return null;
+		}
+	}
+	
+	public static void updateStudentInfo(String adminNo) {
+		try {	
+			Connection conn = DBConnection.getConnection();
+			
+			String sql = "UPDATE T_STUDENT_INFO SET C_DISCONNECTED=1, C_LOGIN=0 WHERE C_ADMISSION_NO=?";
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, adminNo);
+			
+			pstmt.executeUpdate();
+			
+			conn.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 	}
 

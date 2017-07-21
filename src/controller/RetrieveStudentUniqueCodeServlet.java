@@ -45,18 +45,8 @@ public class RetrieveStudentUniqueCodeServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		for (StudentDetails student: Student) {
-			if (student.getUniqueCode().equals(uCode) && student.getDisconnected() == 0) {
-				response.sendRedirect("UpdateStudentSubmissionServlet?tries="+tries+"&adminNo="+adminNo+"&uCode="+uCode);
-				return;
-			}
-			else if (student.getDisconnected() == 1) {
-				request.setAttribute("errorMessage", "You cannot submit once you are disconnected");
-				request.getRequestDispatcher("submission.jsp").forward(request, response);
-				return;
-			}
-			else {
-				request.setAttribute("errorMessage", "Invalid unique code");
-				request.getRequestDispatcher("submission.jsp").forward(request, response);
+			if (student.getDisconnected() == 0) {
+				response.sendRedirect("submission.jsp");
 				return;
 			}
 		}

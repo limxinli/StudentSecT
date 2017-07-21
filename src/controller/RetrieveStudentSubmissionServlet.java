@@ -44,7 +44,7 @@ public class RetrieveStudentSubmissionServlet extends HttpServlet {
 		
 		for (StudentSubmissionDetails student: StudentSub) {
 			session.setAttribute("studentsub", StudentSub);
-			response.sendRedirect("submission.jsp");
+			response.sendRedirect("RetrieveStudentUniqueCodeServlet?adminNo="+adminNo+"&uCode="+uCode);
 			return;
 		}
 		response.sendRedirect("InsertStudentSubmissionServlet?adminNo="+adminNo+"&uCode="+uCode);

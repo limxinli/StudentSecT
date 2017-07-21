@@ -58,11 +58,11 @@
 			for(StudentDetails student:retrieveStudent) {
 	%>			
 				<li role="presentation"><a href="RetrieveStudentSubmissionServlet?adminNo=<%=student.getAdminNo()%>&uCode=<%=student.getUniqueCode()%>">Submissions</a></li>
-				<%
+				<li role="presentation" id="notif"><a href="LogOutServlet?adminNo=<%=student.getAdminNo()%>" onclick="return confirmlogout()">Logout</a></li>
+		<%
 			}
 		 }
-				%>
-				<li role="presentation" id="notif"><a href="LogOutServlet">Logout</a></li>
+		%>
 	          </ul>
 	        </nav>
 	        <h3 class="text-muted"><img src="images/logo.png" alt="Secured-T logo" id="logo">Secured-T</h3>
@@ -132,7 +132,16 @@
 	<footer class="footer">
 	   <p id="copyright">&copy; 2017 Singapore Polytechnic (DISM/FT/3A/62)</p>
 	</footer>
-	    
+	
+	<script type="text/javascript">
+	function confirmlogout() {
+		var result = confirm("Are you sure you want to logout?");
+		if (result) {
+			return true;
+		}
+		return false;
+	}    
+	</script>
 	    
 	<!-- Bootstrap core JavaScript
     ================================================== -->

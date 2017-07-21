@@ -7,18 +7,18 @@ public class StudentDetails {
 	private String portNo;
 	private String timestamp;
 	private String uniqueCode;
-	private int submitDisable;
 	private int cheating;
 	private int disconnected;
 	private int assessmentId;
 	private int sskl;
+	private int login;
 	
 	public StudentDetails() {
 		super();
 	}
 
 	public StudentDetails(int id, String adminNo, String ipAddr, String portNo, String timestamp, String uniqueCode,
-			int submitDisable, int cheating, int disconnected, int assessmentId, int sskl) {
+			int cheating, int disconnected, int assessmentId, int sskl, int login) {
 		super();
 		this.id = id;
 		this.adminNo = adminNo;
@@ -26,11 +26,11 @@ public class StudentDetails {
 		this.portNo = portNo;
 		this.timestamp = timestamp;
 		this.uniqueCode = uniqueCode;
-		this.submitDisable = submitDisable;
 		this.cheating = cheating;
 		this.disconnected = disconnected;
 		this.assessmentId = assessmentId;
 		this.sskl = sskl;
+		this.login = login;
 	}
 
 	public int getId() {
@@ -81,14 +81,6 @@ public class StudentDetails {
 		this.uniqueCode = uniqueCode;
 	}
 
-	public int getSubmitDisable() {
-		return submitDisable;
-	}
-
-	public void setSubmitDisable(int submitDisable) {
-		this.submitDisable = submitDisable;
-	}
-
 	public int getCheating() {
 		return cheating;
 	}
@@ -119,6 +111,14 @@ public class StudentDetails {
 
 	public void setSskl(int sskl) {
 		this.sskl = sskl;
+	}
+	
+	public int getLogin() {
+		return login;
+	}
+
+	public void setLogin(int login) {
+		this.login = login;
 	}
 
 }

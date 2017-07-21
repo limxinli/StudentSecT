@@ -44,11 +44,11 @@
 			for(StudentDetails student:retrieveStudent) {
 	%>			
 				<li role="presentation" class="active"><a href="RetrieveStudentSubmissionServlet?adminNo=<%=student.getAdminNo()%>&uCode=<%=student.getUniqueCode()%>">Submissions</a></li>
-				<%
+				<li role="presentation" id="notif"><a href="LogOutServlet?adminNo=<%=student.getAdminNo()%>" onclick="return confirmlogout()">Logout</a></li>
+		<%
 			}
 		 }
-				%>
-				<li role="presentation" id="notif"><a href="LogOutServlet">Logout</a></li>
+		%>
 				</ul>
 	        </nav>
 	        <h3 class="text-muted"><img src="images/logo.png" alt="Secured-T logo" id="logo">Secured-T</h3>
@@ -60,20 +60,22 @@
 		  <%
 					break;}}
 		%>
-		<%
-			ArrayList<StudentDetails> retrieveStudent = (ArrayList<StudentDetails>)session.getAttribute("student");
-			
-			 if (retrieveStudent != null) {
-				for(StudentDetails student:retrieveStudent) { 
-		%>
-	      <div class="row marketing" id="uniqueContainer">
-	      		<p>Your Unique Code is: <%=student.getUniqueCode()%></p>
-				<form action="RetrieveStudentUniqueCodeServlet" id="uniqueCode">
-					<div style="color: #FF0000;">${errorMessage}</div>
-					<input type="hidden" name="adminNo" value="<%=student.getAdminNo()%>">
-					 Unique Code: <input type="text" name="uCode" id="uCode" class="form-control" required autofocus>
-					 <button class="btn btn-primary" id="submitbutton">Enter</button>
+	<% 
+		 ArrayList<StudentSubmissionDetails> retrieveStudentSub = (ArrayList<StudentSubmissionDetails>)session.getAttribute("studentsub");
+				
+		 if (retrieveStudentSub != null) {
+			for(StudentSubmissionDetails studentsub:retrieveStudentSub) {
+	%>	
+	      <div class="row marketing">
+		  <p id="imptmessage2">Please include your admission number in the naming convention: <br>Admission Number.&lt;extension&gt; <br>E.g. P1234567.doc</p>
+	      <div onsubmit="return confirmation()" class="row marketing" id="uploadcontainer">
+				<form action="FileUploadServlet" method="post" enctype="multipart/form-data">
+					<input type="file" name="file"/>
+					<input type="hidden" name="adminNo" value="<%=studentsub.getAdminNo()%>">
+					<input type="Submit" class="btn btn-primary" id="submitbutton">
 				</form>
+	      </div>
+	      <div style="color: #FF0000;">${cfmMessage}</div>
 	      </div>
 	      <%
 				}
@@ -83,6 +85,16 @@
 	<footer class="footer">
 	   <p id="copyright">&copy; 2017 Singapore Polytechnic (DISM/FT/3A/62)</p>
 	</footer>
+	
+	<script type="text/javascript">
+	function confirmlogout() {
+		var result = confirm("Are you sure you want to logout?");
+		if (result) {
+			return true;
+		}
+		return false;
+	}    
+	</script>
 	   
 	<!-- Bootstrap core JavaScript
     ================================================== -->
