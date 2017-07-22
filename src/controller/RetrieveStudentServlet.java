@@ -33,6 +33,13 @@ public class RetrieveStudentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		String examCode = request.getParameter("examCode");
 		String adminNo = request.getParameter("adminNo");
 		
@@ -60,13 +67,6 @@ public class RetrieveStudentServlet extends HttpServlet {
 		}
 		request.setAttribute("errorMessage", "You need to enter your information in CSI before you can log in here.");
 		request.getRequestDispatcher("login.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }
