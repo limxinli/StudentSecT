@@ -9,15 +9,16 @@ import db.DBConnection;
 
 public class StudentManager {
 	
-	public static void updateStudentInfo(String examCode, String adminNo) {
+	public static void updateStudentInfo(int tableNo, String examCode, String adminNo) {
 		try {	
 			Connection conn = DBConnection.getConnection();
 			
-			String sql = "UPDATE T_STUDENT_INFO SET C_ASSESSMENT_ID=(SELECT C_ID FROM T_ASSESSMENT WHERE C_EXAM_CODE=?), C_LOGIN=1 WHERE C_ADMISSION_NO=?";
+			String sql = "UPDATE T_STUDENT_INFO SET C_TABLE_NO=?, C_ASSESSMENT_ID=(SELECT C_ID FROM T_ASSESSMENT WHERE C_EXAM_CODE=?), C_LOGIN=1 WHERE C_ADMISSION_NO=?";
 
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, examCode);
-			pstmt.setString(2, adminNo);
+			pstmt.setInt(1, tableNo);
+			pstmt.setString(2, examCode);
+			pstmt.setString(3, adminNo);
 			
 			pstmt.executeUpdate();
 			
@@ -44,6 +45,7 @@ public class StudentManager {
 			while (rs.next()) {
 				int id = rs.getInt("C_ID");
 				adminNo = rs.getString("C_ADMISSION_NO");
+				int tableNo = rs.getInt("C_TABLE_NO");
 				String ip = rs.getString("C_IP");
 				String port = rs.getString("C_PORT");
 				String timestamp = rs.getString("C_TIMESTAMP");
@@ -55,7 +57,7 @@ public class StudentManager {
 				int login = rs.getInt("C_LOGIN");
 				
 
-				StudentDetails sid = new StudentDetails(id, adminNo, ip, port, timestamp, uniqueCode, cheating, disconnected, assessmentId, sskl, login);
+				StudentDetails sid = new StudentDetails(id, adminNo, tableNo, ip, port, timestamp, uniqueCode, cheating, disconnected, assessmentId, sskl, login);
 				Student.add(sid);
 			}
 			conn.close();

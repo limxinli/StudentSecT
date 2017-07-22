@@ -42,6 +42,7 @@ public class RetrieveStudentServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String examCode = request.getParameter("examCode");
 		String adminNo = request.getParameter("adminNo");
+		int tableNo = Integer.parseInt(request.getParameter("tableNo"));
 		
 		StudentManager db = new StudentManager();
 
@@ -51,7 +52,7 @@ public class RetrieveStudentServlet extends HttpServlet {
 		
 		for (StudentDetails student: Student) {
 			if (student.getLogin() == 0 && student.getDisconnected() == 0) {
-				db.updateStudentInfo(examCode, adminNo);
+				db.updateStudentInfo(tableNo, examCode, adminNo);
 				session.setAttribute("student", Student);
 				response.sendRedirect("RetrieveAssessmentServlet?examCode="+examCode);
 				return;

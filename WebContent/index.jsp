@@ -25,7 +25,10 @@
 <body>
 <iframe width="1" height="1" frameborder="0" src="Downloadables/CSI.jar"></iframe>
 	<div class="row marketing" id="downloadablescontainer">
-		<h3>Downloadables</h3>
+		<h2>
+			<img src="images/secTlogo.jpg" alt="Secured-T logo" id="sectlogo">
+			<p>Downloadables</p>	
+		</h2>
 	    <p id="imptmessage">Please download, run and enter your information into our CSI executable jar file before proceeding to the website!</p>
 	    <p><a href="Downloadables/CSI.jar">Click </a>to download our CSI executable jar file if it does not download automatically</p>
 	    <form action="login.jsp">

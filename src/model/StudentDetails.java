@@ -3,6 +3,7 @@ package model;
 public class StudentDetails {
 	private int id;
 	private String adminNo;
+	private int tableNo;
 	private String ipAddr;
 	private String portNo;
 	private String timestamp;
@@ -17,11 +18,12 @@ public class StudentDetails {
 		super();
 	}
 
-	public StudentDetails(int id, String adminNo, String ipAddr, String portNo, String timestamp, String uniqueCode,
+	public StudentDetails(int id, String adminNo, int tableNo, String ipAddr, String portNo, String timestamp, String uniqueCode,
 			int cheating, int disconnected, int assessmentId, int sskl, int login) {
 		super();
 		this.id = id;
 		this.adminNo = adminNo;
+		this.tableNo = tableNo;
 		this.ipAddr = ipAddr;
 		this.portNo = portNo;
 		this.timestamp = timestamp;
@@ -47,6 +49,14 @@ public class StudentDetails {
 
 	public void setAdminNo(String adminNo) {
 		this.adminNo = adminNo;
+	}
+
+	public int getTableNo() {
+		return tableNo;
+	}
+
+	public void setTableNo(int tableNo) {
+		this.tableNo = tableNo;
 	}
 
 	public String getIpAddr() {
