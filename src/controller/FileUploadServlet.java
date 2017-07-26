@@ -64,8 +64,7 @@ public class FileUploadServlet extends HttpServlet {
 			    //filename with version number
 			    fileName = fileNameSplits[0]+"_"+version+"."+fileNameSplits[extensionIndex];
 			    
-		    	// /home/securedt/submission/
-				filePart.write("C:/temp/"+fileName);
+				filePart.write("/home/securedt/submission/"+fileName);
 				db.updateStudentSubmission(fileName, version, adminNo);
 				
 				request.setAttribute("cfmMessage", "You have submitted "+version+" time(s).");

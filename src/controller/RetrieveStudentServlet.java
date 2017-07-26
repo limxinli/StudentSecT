@@ -33,13 +33,6 @@ public class RetrieveStudentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String examCode = request.getParameter("examCode");
 		String adminNo = request.getParameter("adminNo");
 		int tableNo = Integer.parseInt(request.getParameter("tableNo"));
@@ -51,23 +44,32 @@ public class RetrieveStudentServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		for (StudentDetails student: Student) {
-			if (student.getLogin() == 0 && student.getDisconnected() == 0) {
-				db.updateStudentInfo(tableNo, examCode, adminNo);
-				session.setAttribute("student", Student);
-				response.sendRedirect("RetrieveAssessmentServlet?examCode="+examCode);
-				return;
-			}
-			else if (student.getLogin() == 1) {
+			if (student.getLogin() == 1) {
 				request.setAttribute("errorMessage", "The admission number has been logged in.");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
+				return;
 			}
-			else {
+			else if (student.getDisconnected() == 1) {
 				request.setAttribute("errorMessage", "You are not allowed to log in, you have been disconnected.");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
+				return;
+			}
+			else{
+				db.updateStudentInfo(tableNo, examCode, adminNo);
+				session.setAttribute("student", Student);
+				response.sendRedirect("RetrieveAnnouncementServlet?assessmentID="+student.getAssessmentId());
+				return;
 			}
 		}
 		request.setAttribute("errorMessage", "You need to enter your information in CSI before you can log in here.");
 		request.getRequestDispatcher("login.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 	}
 
 }
