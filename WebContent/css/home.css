@@ -103,7 +103,18 @@ html {
 	letter-spacing: 0.04em;
 	margin: 0;
   	font-weight: bold;
-  	color: #ff5252;
+  	border-top: 1px solid #e5e5e5;
+  	padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#warning {
+	color: #ff5252;
+	font-family: Palatino;
+	font-size: 1.5em;
+	letter-spacing: 0.04em;
+	margin: 0;
+	font-weight: bold;
 }
 
 .announcement {

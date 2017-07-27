@@ -57,7 +57,7 @@
 		 if (retrieveStudent != null) {
 			for(StudentDetails student:retrieveStudent) {
 	%>			
-				<li role="presentation"><a href="RetrieveStudentSubmissionServlet?adminNo=<%=student.getAdminNo()%>&uCode=<%=student.getUniqueCode()%>">Submissions</a></li>
+				<li role="presentation"><a href="RetrieveStudentSubmissionServlet?adminNo=<%=student.getAdminNo()%>&uCode=<%=student.getUniqueCode()%>&assessmentID="<%=student.getAssessmentId()%>>Submissions</a></li>
 				<li role="presentation" id="notif"><a href="LogOutServlet?adminNo=<%=student.getAdminNo()%>" onclick="return confirmlogout()">Logout</a></li>
 		<%
 		break;
@@ -77,7 +77,7 @@
 		  %>
 	      <div class="row marketing">
 			<div class="announcement">
-			  <h2 id="announcement_title">Announcements</h2>
+			  <h2 id="warning">Warnings</h2>
 			  	<p id="imptmessage">**Important**<br>
 					Please note that your activities are being monitored the entire time you are connected to this network. You are only allowed to access the following domains for this assessment:<br></p>	 
 					<%
@@ -105,6 +105,7 @@
 			  	<p id="imptmessage2">
 			  		If you attempt to go to domains not allowed for this assessment, you will be blocked.	
 			  	</p>
+			  	<h2 id="announcement_title">Announcements</h2>
 			  		<%
 			  		ArrayList<AnnouncementDetails> retrieveAnnouncement = (ArrayList<AnnouncementDetails>)session.getAttribute("announcement");
 			  		for(AnnouncementDetails announcement:retrieveAnnouncement) {

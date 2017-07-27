@@ -35,6 +35,7 @@ public class RetrieveStudentSubmissionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String adminNo = request.getParameter("adminNo");
 		String uCode = request.getParameter("uCode");
+		String assessmentID = request.getParameter("assessmentID");
 		
 		StudentSubmissionManager db = new StudentSubmissionManager();
 		
@@ -47,7 +48,7 @@ public class RetrieveStudentSubmissionServlet extends HttpServlet {
 			response.sendRedirect("RetrieveStudentUniqueCodeServlet?adminNo="+adminNo+"&uCode="+uCode);
 			return;
 		}
-		response.sendRedirect("InsertStudentSubmissionServlet?adminNo="+adminNo+"&uCode="+uCode);
+		response.sendRedirect("InsertStudentSubmissionServlet?adminNo="+adminNo+"&uCode="+uCode+"&assessmentID="+assessmentID);
 	}
 
 	/**

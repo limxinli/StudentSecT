@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import db.DBConnection;
 
 public class StudentSubmissionManager {
-	public static void insertStudentSubmission(String adminNo, String uCode) {
+	public static int insertStudentSubmission(String adminNo, String uCode) {
+		int affectedRow = 0;
 		try {	
 			Connection conn = DBConnection.getConnection();
 			
@@ -19,13 +20,14 @@ public class StudentSubmissionManager {
 			pstmt.setString(2, uCode);
 			pstmt.setString(3, adminNo);
 			
-			pstmt.executeUpdate();
+			affectedRow = pstmt.executeUpdate();
 			
 			conn.close();
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		return affectedRow;
 	}
 	
 	public static ArrayList<StudentSubmissionDetails> retrieveStudentSubmission(String adminNo) {

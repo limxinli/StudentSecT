@@ -35,11 +35,17 @@ public class InsertStudentSubmissionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String adminNo = request.getParameter("adminNo");
 		String uCode = request.getParameter("uCode");
+		String assessmentID = request.getParameter("assessmentID");
 		
 		StudentSubmissionManager db = new StudentSubmissionManager();
 		
-		db.insertStudentSubmission(adminNo, uCode);
-		response.sendRedirect("RetrieveStudentSubmissionServlet?adminNo="+adminNo+"&uCode="+uCode);
+		int result = db.insertStudentSubmission(adminNo, uCode);
+		// check if insert is successful.
+		if (result == 1) {
+			response.sendRedirect("RetrieveStudentSubmissionServlet?adminNo="+adminNo+"&uCode="+uCode);
+		} else {		
+			response.sendRedirect("RetrieveAnnouncementServlet?assessmentID="+assessmentID);
+		}
 	}
 
 	/**
