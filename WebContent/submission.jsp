@@ -38,15 +38,14 @@
 	          <ul class="nav nav-pills pull-right">
 	            <li role="presentation"><a href="RetrieveAnnouncementServlet?assessmentID=<%=assessment.getId()%>">Announcements</a></li>
 	<% 
-		 ArrayList<StudentDetails> retrieveStudent = (ArrayList<StudentDetails>)session.getAttribute("student");
-				
-		 if (retrieveStudent != null) {
+		 ArrayList<StudentDetails> retrieveStudent = (ArrayList<StudentDetails>)session.getAttribute("studentById");
+
+	 	 if (retrieveStudent != null) {
 			for(StudentDetails student:retrieveStudent) {
 	%>			
-				<li role="presentation" class="active"><a href="RetrieveStudentSubmissionServlet?adminNo=<%=student.getAdminNo()%>&uCode=<%=student.getUniqueCode()%>">Submissions</a></li>
-				<li role="presentation" id="notif"><a href="LogOutServlet?adminNo=<%=student.getAdminNo()%>" onclick="return confirmlogout()">Logout</a></li>
+				<li role="presentation" class="active"><a href="RetrieveStudentUniqueCodeServlet?hiddenID=<%=student.getId()%>&uCode=<%=student.getUniqueCode()%>">Submissions</a></li>
+				<li role="presentation" id="notif"><a href="LogOutServlet?hiddenID=<%=student.getId()%>" onclick="return confirmlogout()">Logout</a></li>
 		<%
-		break;
 			}
 		 }
 		%>
@@ -62,17 +61,18 @@
 					break;}}
 		%>
 	<% 
-		 ArrayList<StudentSubmissionDetails> retrieveStudentSub = (ArrayList<StudentSubmissionDetails>)session.getAttribute("studentsub");
+		 ArrayList<StudentDetails> retrieveStudentSub = (ArrayList<StudentDetails>)session.getAttribute("studentById");
 				
 		 if (retrieveStudentSub != null) {
-			for(StudentSubmissionDetails studentsub:retrieveStudentSub) {
+			for(StudentDetails studentsub:retrieveStudentSub) {
 	%>	
 	      <div class="row marketing">
-		  <p id="imptmessage2">Please include your admission number in the naming convention: <br>Admission Number.&lt;extension&gt; <br>E.g. P1234567.doc</p>
+		  <p id="imptmessage2">Please remember to name your submission as instructed by your lecturer.</p>
+		  <p id="imptmessage2">Filename must not be more than 20 characters long.</p>
 	      <div onsubmit="return confirmation()" class="row marketing" id="uploadcontainer">
 				<form action="FileUploadServlet" method="post" enctype="multipart/form-data">
 					<input type="file" name="file"/>
-					<input type="hidden" name="adminNo" value="<%=studentsub.getAdminNo()%>">
+					<input type="hidden" name="hiddenID" value="<%=studentsub.getId()%>">
 					<input type="Submit" class="btn btn-primary" id="submitbutton">
 				</form>
 	      </div>
@@ -80,7 +80,7 @@
 	      </div>
 	      <%
 				}
-			 }
+		}
 	      %>
 		</div>
 	<footer class="footer">

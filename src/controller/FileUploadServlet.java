@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -13,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import model.StudentSubmissionDetails;
-import model.StudentSubmissionManager;
+import model.StudentDetails;
+import model.StudentManager;
 
 /**
  * Servlet implementation class FileUploadServlet
@@ -43,33 +44,48 @@ public class FileUploadServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String adminNo = request.getParameter("adminNo");
+		int hiddenID = Integer.parseInt(request.getParameter("hiddenID"));
 		
 		Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 	    InputStream fileContent = filePart.getInputStream();
 	   
-	    StudentSubmissionManager db = new StudentSubmissionManager();
+	    StudentManager db = new StudentManager();
 	    
-	    ArrayList<StudentSubmissionDetails> StudentSub = db.retrieveStudentSubmission(adminNo);
+	    ArrayList<StudentDetails> StudentSub = db.retrieveStudent(hiddenID);
 	    
-	    for (StudentSubmissionDetails student: StudentSub) {
+	    for (StudentDetails student: StudentSub) {
 	    	if (!fileName.equals("")) {
 	    		int version = student.getVersion();
 		    	version++;
 		    	
+		    	String ipAddress = request.getHeader("HTTP_X_FORWARDED_FOR");  
+				if (ipAddress == null) {  
+				   ipAddress = request.getRemoteAddr();  
+				}
+				String [] ipSubnet = ipAddress.split("\\.");
+				int subnetIndex = ipSubnet.length - 1;
+		    	
 			    String[] fileNameSplits = fileName.split("\\.");
-			    // extension is assumed to be the last part
-			    int extensionIndex = fileNameSplits.length - 1;
-			    //filename with version number
-			    fileName = fileNameSplits[0]+"_"+version+"."+fileNameSplits[extensionIndex];
-			    
-				filePart.write("/home/securedt/submission/"+fileName);
-				db.updateStudentSubmission(fileName, version, adminNo);
-				
-				request.setAttribute("cfmMessage", "You have submitted "+version+" time(s).");
-				request.getRequestDispatcher("submission.jsp").forward(request, response);
-				return;	
+			    int length = fileNameSplits[0].length();
+			    if (length <= 20) {
+				    // extension is assumed to be the last part
+				    int extensionIndex = fileNameSplits.length - 1;
+				    //filename with subnet and adminNo
+				    String newFileName = ipSubnet[subnetIndex]+"_"+student.getAdminNo()+"_"+fileNameSplits[0]+"."+fileNameSplits[extensionIndex];
+				    
+					filePart.write("/home/securedt/submission/"+newFileName);
+					db.updateStudentSubmission(newFileName, version, hiddenID);
+					
+					request.setAttribute("cfmMessage", "You have submitted "+version+" time(s).");
+					request.getRequestDispatcher("submission.jsp").forward(request, response);
+					return;	
+			    }
+			    else {
+			    	request.setAttribute("cfmMessage", "Please rename your file to less than 20 characters!");
+					request.getRequestDispatcher("submission.jsp").forward(request, response);
+					return;	
+			    }
 	    	}
 	    	else {
 				request.setAttribute("cfmMessage", "Please choose a file.");

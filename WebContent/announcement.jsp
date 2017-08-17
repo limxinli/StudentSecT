@@ -8,7 +8,7 @@
 	<title>Secured-T</title>
 	
 		<!-- Jquery -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="dist/js/jquery-3.2.1.js"></script>
 	
 	    <!-- Bootstrap core CSS -->
 	    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -52,15 +52,14 @@
 	          <ul class="nav nav-pills pull-right">
 	            <li role="presentation" class="active" id="notif"><a href="RetrieveAssessmentServlet?examCode=<%=assessment.getExamCode()%>">Announcements</a></li>
 	<% 
-		 ArrayList<StudentDetails> retrieveStudent = (ArrayList<StudentDetails>)session.getAttribute("student");
-				
+		 ArrayList<StudentDetails> retrieveStudent = (ArrayList<StudentDetails>)session.getAttribute("studentById");
+		
 		 if (retrieveStudent != null) {
 			for(StudentDetails student:retrieveStudent) {
-	%>			
-				<li role="presentation"><a href="RetrieveStudentSubmissionServlet?adminNo=<%=student.getAdminNo()%>&uCode=<%=student.getUniqueCode()%>&assessmentID="<%=student.getAssessmentId()%>>Submissions</a></li>
-				<li role="presentation" id="notif"><a href="LogOutServlet?adminNo=<%=student.getAdminNo()%>" onclick="return confirmlogout()">Logout</a></li>
+	%>
+				<li role="presentation"><a href="RetrieveStudentUniqueCodeServlet?hiddenID=<%=student.getId()%>&uCode=<%=student.getUniqueCode()%>">Submissions</a></li>
+				<li role="presentation" id="notif"><a href="LogOutServlet?hiddenID=<%=student.getId()%>" onclick="return confirmlogout()">Logout</a></li>
 		<%
-		break;
 			}
 		 }
 		%>
@@ -78,8 +77,10 @@
 	      <div class="row marketing">
 			<div class="announcement">
 			  <h2 id="warning">Warnings</h2>
-			  	<p id="imptmessage">**Important**<br>
-					Please note that your activities are being monitored the entire time you are connected to this network. You are only allowed to access the following domains for this assessment:<br></p>	 
+			  	<p id="imptmessage">
+					Please note that your activities are being monitored the entire time you are connected to this network.<br>
+					Any forms of communication will be considered cheating.<br> 
+					You are only allowed to access the following domains for this assessment:<br></p>	 
 					<%
 			  		ArrayList<DomainDetails> retrieveDomain = (ArrayList<DomainDetails>)session.getAttribute("domain");
 					if (retrieveDomain != null) {
@@ -148,7 +149,6 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="dist/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -43,8 +43,10 @@ public class RetrieveAnnouncementServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		
-		session.removeAttribute("REFRESH");
-		
+		if (session.getAttribute("REFRESH") == "TRUE") {
+			session.removeAttribute("REFRESH");
+		}
+
 		session.setAttribute("announcement", Announcement);
 		response.sendRedirect("RetrieveDomainServlet?assessmentID="+assessmentID);
 

@@ -13,13 +13,15 @@ public class StudentDetails {
 	private int assessmentId;
 	private int sskl;
 	private int login;
+	private String fileName;
+	private int version;
 	
 	public StudentDetails() {
 		super();
 	}
 
 	public StudentDetails(int id, String adminNo, int tableNo, String ipAddr, String portNo, String timestamp, String uniqueCode,
-			int cheating, int disconnected, int assessmentId, int sskl, int login) {
+			int cheating, int disconnected, int assessmentId, int sskl, int login, String fileName, int version) {
 		super();
 		this.id = id;
 		this.adminNo = adminNo;
@@ -33,6 +35,8 @@ public class StudentDetails {
 		this.assessmentId = assessmentId;
 		this.sskl = sskl;
 		this.login = login;
+		this.fileName = fileName;
+		this.version = version;
 	}
 
 	public int getId() {
@@ -129,6 +133,22 @@ public class StudentDetails {
 
 	public void setLogin(int login) {
 		this.login = login;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 }

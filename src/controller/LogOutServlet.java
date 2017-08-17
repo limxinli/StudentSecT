@@ -30,7 +30,7 @@ public class LogOutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String adminNo = request.getParameter("adminNo");
+		int hiddenID = Integer.parseInt(request.getParameter("hiddenID"));
 		
 		HttpSession session = request.getSession();
 		
@@ -38,7 +38,7 @@ public class LogOutServlet extends HttpServlet {
 		
 		StudentManager db = new StudentManager();
 		
-		db.updateStudentInfo(adminNo);
+		db.updateStudentInfo(hiddenID);
 		
 		response.sendRedirect("login.jsp");
 

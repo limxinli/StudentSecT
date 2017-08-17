@@ -36,16 +36,17 @@ public class RetrieveStudentUniqueCodeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String uCode = request.getParameter("uCode");
-		String adminNo = request.getParameter("adminNo");
+		int hiddenID = Integer.parseInt(request.getParameter("hiddenID"));
 		
 		StudentManager db = new StudentManager();
 
-		ArrayList<StudentDetails> Student = db.retrieveStudent(adminNo);
+		ArrayList<StudentDetails> Student = db.retrieveStudent(hiddenID);
 
 		HttpSession session = request.getSession();
 		
 		for (StudentDetails student: Student) {
 			if (student.getDisconnected() == 0) {
+				session.setAttribute("studentById", Student);
 				response.sendRedirect("submission.jsp");
 				return;
 			}

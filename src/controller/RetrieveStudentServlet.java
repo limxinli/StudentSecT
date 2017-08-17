@@ -55,8 +55,9 @@ public class RetrieveStudentServlet extends HttpServlet {
 				return;
 			}
 			else{
-				db.updateStudentInfo(tableNo, examCode, adminNo);
-				session.setAttribute("student", Student);
+				db.updateStudentInfo(tableNo, examCode, student.getId());
+				ArrayList<StudentDetails> StudentById = db.retrieveStudent(student.getId());
+				session.setAttribute("studentById", StudentById);
 				response.sendRedirect("RetrieveAnnouncementServlet?assessmentID="+student.getAssessmentId());
 				return;
 			}
